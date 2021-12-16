@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html>
+    <head>
+        <title>My Web Server</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?202012100341">
+    </head>
+  <body>
+    <div>
+
+        <div class="vertical-menu">
+          <a href="#" class="active">Home</a>
+            {% for text, link in links.items() %}
+                <a href="{{ link }}">{{ text }}</a>
+            {% endfor %}
+        </div>
+    </div>
+  </body>
+</html>
