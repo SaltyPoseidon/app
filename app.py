@@ -33,4 +33,4 @@ def fair_vs_pclass():
     return render_index("fair_vs_pclass.png")
 
 
-app.run()
+# app.run()
