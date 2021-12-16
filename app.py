@@ -4,7 +4,7 @@ from flask import render_template
 import pandas as pd
 import matplotlib.pyplot as plt
 import time
-
+import seaborn as sns
 app = Flask(__name__)
 links = {"Download" : "/download",
          "Pairplot" : "/pairplot",
@@ -31,6 +31,20 @@ def fair_vs_pclass():
     plt.boxplot(x, y)
     plt.savefig('static/tmp/fair_vs_pclass.png')
     return render_index("fair_vs_pclass.png")
+@app.route('/pclass_vs_sex', methods=['GET'])
+
+def pclass_vs_sex():
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots()
+    data = pd.read_csv ("data/titanic_train.csv")
+    result = {}
+    for (cl, sex), sub_df in data.groupby(['Pclass', 'Sex']):
+        result[f"{cl} {sex}"] = sub_df['Age'].mean()
+
+    plt.bar (result.keys(), result.values())
+    plt.savefig('static/tmp/pclass_vs_sex.png')
+    return render_index ("pclass_vs_sex.png")
 
 
 # app.run()
